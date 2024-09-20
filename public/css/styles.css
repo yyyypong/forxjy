@@ -1,0 +1,90 @@
+/* 单词展示容器样式 */
+.word-container {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffccf9 0%, #ff99e6 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* 单词的动画效果 */
+.word-container h1 {
+    font-size: 3rem;
+    color: #333;
+    animation: fadeIn 1s ease;
+}
+
+.word-container p {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+/* 刷新按钮样式 */
+.refresh-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #ff99e6;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.refresh-btn:hover {
+    background-color: #ff66cc;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.quiz-container {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffccf9 0%, #ff99e6 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.quiz-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff99e6;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quiz-btn:hover {
+    background-color: #ff66cc;
+}
+
+/* 进度条 */
+.progress-bar {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+#progressFill {
+    height: 20px;
+    border-radius: 5px;
+    background-color: green;
+}
+
+#quizStats {
+    margin-top: 20px;
+}

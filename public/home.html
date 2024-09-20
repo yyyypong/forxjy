@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单词库主页</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffccf9;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #ff66cc;
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .word-display {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .word-display h1 {
+            font-size: 36px;
+            color: #ff66cc;
+        }
+        .word-display p {
+            font-size: 18px;
+        }
+        button {
+            background-color: #ff66cc;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff33aa;
+        }
+        /* 隐藏的内容区域 */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" data-section="homeSection">单词展示</a>
+        <a href="#" data-section="quizSection">单词抽查</a>
+        <a href="#" data-section="leaderboardSection">排行榜</a>
+        <a href="#" data-section="wordbankSection">单词库</a>
+        <a href="#" data-section="messageboardSection">留言板</a>
+        <a href="#" data-section="profileSection">个人主页</a>
+    </nav>
+
+    <!-- 单词展示模块 -->
+    <div id="homeSection" class="container">
+        <div class="word-display" id="wordDisplay">
+            <h1>Word</h1>
+            <p>词性: Noun</p>
+            <p>解释: 一个单词的解释</p>
+        </div>
+        <button id="refreshBtn" class="refresh-btn">刷新单词</button>
+    </div>
+
+<!-- 单词抽查模块 -->
+<div id="quizSection" class="container">
+    <h2>单词抽查</h2>
+
+    <!-- 单词显示区域 -->
+    <div id="quizWordDisplay" class="word-display">
+        <!-- 动态显示当前单词 -->
+    </div>
+
+    <!-- 选项区域 -->
+    <div id="quizOptions" class="options">
+        <!-- 动态生成选项 -->
+    </div>
+
+    <!-- 提交和下一题按钮 -->
+    <div class="button-group">
+        <!-- 提交按钮 -->
+        <button id="submitAnswerBtn" disabled>提交答案</button>
+        
+        <!-- 下一题按钮 -->
+        <button id="nextQuestionBtn" disabled>下一题</button>
+    </div>
+
+    <!-- 答案结果显示区 -->
+    <div id="quizResult"></div> <!-- 添加这个元素来显示答题结果 -->
+
+    <!-- 统计信息区 -->
+    <div id="quizStats" class="stats">
+        <p>答题总数: <span id="totalAttempts">0</span></p>
+        <p>正确率: <span id="accuracy">0%</span></p>
+
+        <div class="progress-bar">
+            <div id="progressFill"></div>
+        </div>
+
+        <p>本周任务进度: <span id="weeklyProgress">0/20</span></p>
+        
+        <!-- 警告信息 -->
+        <p id="warningMessage" class="warningMessage">抓紧时间完成嗷，时间不多了！！！</p>
+    </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
+
+    <!-- 排行榜模块 -->
+    <div id="leaderboardSection" class="container" style="display: none;">
+        <h2>排行榜</h2>
+        <!-- 排行榜内容 -->
+    </div>
+
+    <!-- 单词库模块 -->
+    <div id="wordbankSection" class="container" style="display: none;">
+        <h2>单词库</h2>
+        <!-- 单词库内容 -->
+    </div>
+
+    <!-- 留言板模块 -->
+    <div id="messageboardSection" class="container" style="display: none;">
+        <h2>留言板</h2>
+        <!-- 留言板内容 -->
+    </div>
+
+    <!-- 个人主页模块 -->
+    <div id="profileSection" class="container" style="display: none;">
+        <h2>个人主页</h2>
+        <!-- 个人主页内容 -->
+    </div>
+
+    <script src="js/script.js"></script> <!-- 引入外部JS文件 -->
+
+</body>
+</html>

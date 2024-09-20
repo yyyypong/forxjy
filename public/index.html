@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页面</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffccf9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container, .register-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background-color: #ff66cc;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff33aa;
+        }
+        .toggle-link {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #ff33aa;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="loginForm">
+        <h2>登录</h2>
+        <input type="text" id="loginAccount" placeholder="账号" />
+        <input type="password" id="loginPassword" placeholder="密码" />
+        <button onclick="login()">登录</button>
+        <div class="toggle-link" onclick="toggleForm()">还没有账号？注册</div>
+    </div>
+
+    <div class="register-container" id="registerForm" style="display:none;">
+        <h2>注册</h2>
+        <input type="text" id="registerAccount" placeholder="账号" />
+        <input type="password" id="registerPassword" placeholder="密码" />
+        <input type="text" id="activationCode" placeholder="激活码" />
+        <button onclick="register()">注册</button>
+        <div class="toggle-link" onclick="toggleForm()">已有账号？登录</div>
+    </div>
+
+    <script>
+        function toggleForm() {
+            const loginForm = document.getElementById("loginForm");
+            const registerForm = document.getElementById("registerForm");
+            if (loginForm.style.display === "none") {
+                loginForm.style.display = "block";
+                registerForm.style.display = "none";
+            } else {
+                loginForm.style.display = "none";
+                registerForm.style.display = "block";
+            }
+        }
+
+        function login() {
+    // 获取用户输入的账号和密码
+    const account = document.getElementById('loginAccount').value;
+    const password = document.getElementById('loginPassword').value;
+
+    // 检查是否输入了账号和密码
+            if (!account || !password) {
+                alert('请输入账号和密码');
+                return;
+            }
+
+    // 发起POST请求，向服务器发送登录请求
+    fetch('http://localhost:3000/login', {  // 确保路径和端口正确
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'  // 告诉服务器发送的是JSON数据
+        },
+        body: JSON.stringify({ account, password })  // 将账号和密码发送给服务器
+    })
+    .then(response => response.json())  // 解析服务器的JSON响应
+    .then(data => {
+        if (data.message === '登录成功') {
+            alert('登进来咯！！！！我老婆登进来咯！！！！！');
+            // 登录成功后可以重定向到主页或其他页面
+            window.location.href = 'home.html';  // 假设登录后跳转到home.html
+        } else {
+            alert(data.message);  // 显示服务器返回的错误信息
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);  // 处理请求错误
+        alert('你什么也没看到，我代码出问题了TAT');
+    });
+
+    console.log('登录按钮被点击');
+}
+ 
+function register() {
+    // 获取用户输入的账号和密码
+    const account = document.getElementById('registerAccount').value.trim();
+    const password = document.getElementById('registerPassword').value.trim();
+    const activationCode = document.getElementById('activationCode').value.trim();
+
+    // 检查是否输入了账号和密码
+            if (!account || !password || !activationCode) {
+                alert('要填完所有信息，不许偷懒噢小宝宝');
+                return;
+            }
+
+    // 发起POST请求，向服务器发送登录请求
+    fetch('http://localhost:3000/register', {  // 确保路径和端口正确
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'  // 告诉服务器发送的是JSON数据
+        },
+        body: JSON.stringify({ account, password, activationCode })  // 将账号和密码发送给服务器
+    })
+    .then(response => response.json())  // 解析服务器的JSON响应
+    .then(data => {
+        if (data.message === '恭喜老婆！！！！还差一步就可以进去啦！！') {
+            alert('恭喜老婆！！！！还差一步就可以进去啦！！');
+            toggleForm();
+        } else {
+            alert(data.message);  // 显示服务器返回的错误信息
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);  // 处理请求错误
+        alert('你什么也没看到，我代码出问题了TAT');
+    });
+
+    console.log('注册按钮被点击');
+}
+
+    </script>
+</body>
+</html>
