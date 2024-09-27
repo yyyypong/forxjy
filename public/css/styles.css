@@ -88,3 +88,859 @@
 #quizStats {
     margin-top: 20px;
 }
+
+/* 排行榜的样式 */
+.leaderboard-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.leaderboard-table th {
+    color: #ff66cc;
+    font-weight: bold;
+    padding: 15px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+}
+
+.leaderboard-table tr {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.leaderboard-table tr:hover {
+    transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.leaderboard-table td {
+    padding: 15px;
+    color: white;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.leaderboard-table td:first-child {
+    font-weight: bold;
+    color: #ff66cc;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.leaderboard-table td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/* 排行榜容器 */
+#leaderboard {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    margin-top: 20px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffccf9;
+    margin-bottom: 20px;
+}
+
+/* 搜索框样式 */
+.search-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search-container input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-container input:focus {
+    border-color: #ff66cc;
+}
+
+/* 单词列表样式 */
+.word-list {
+    max-height: 400px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.word-list-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.word-list-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.word-list-item span {
+    color: white;
+}
+
+.word-list-item button {
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.word-list-item button:hover {
+    background-color: #ff33aa;
+}
+
+/* 添加单词表单样式 */
+.add-word-form {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.add-word-form input {
+    width: 20%;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.add-word-form input:focus {
+    border-color: #ff66cc;
+}
+
+.add-word-form button {
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-word-form button:hover {
+    background-color: #ff33aa;
+}
+
+/* 留言输入框样式 */
+.message-input-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.message-input-container input {
+    width: 70%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.message-input-container input:focus {
+    border-color: #ff66cc;
+}
+
+.message-input-container button {
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+
+.message-input-container button:hover {
+    background-color: #ff33aa;
+}
+
+/* 留言列表样式 */
+.message-list {
+    max-height: 400px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.message-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.message-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.message-item span {
+    color: white;
+}
+
+.message-item button {
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.message-item button:hover {
+    background-color: #ff33aa;
+}
+
+/* 分页按钮样式 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+}
+
+.pagination button:hover {
+    background-color: #ff33aa;
+}
+
+.pagination span {
+    color: white;
+    font-size: 16px;
+}
+
+/* 回复相关样式 */
+.reply-container {
+    margin-left: 20px;
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+    padding-left: 10px;
+}
+
+.reply-item {
+    margin-top: 10px;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.reply-form {
+    margin-top: 10px;
+    display: flex;
+}
+
+.reply-form input {
+    flex-grow: 1;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.reply-form button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.show-replies-btn {
+    background: none;
+    border: none;
+    color: #ff66cc;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+/* 留言板样式 */
+.message-list {
+    margin-top: 20px;
+}
+
+.message-item {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.message-content {
+    margin-bottom: 10px;
+}
+
+.message-author {
+    font-weight: bold;
+    color: #ff66cc;
+    margin-right: 5px;
+}
+
+.message-text {
+    color: white;
+}
+
+.message-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.message-actions button {
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.message-actions button:hover {
+    background-color: #ff33aa;
+}
+
+.reply-section {
+    margin-top: 10px;
+}
+
+.reply-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.reply-form input {
+    flex-grow: 1;
+/* 单词展示容器样式 */
+.word-container {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffccf9 0%, #ff99e6 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* 单词的动画效果 */
+.word-container h1 {
+    font-size: 3rem;
+    color: #333;
+    animation: fadeIn 1s ease;
+}
+
+.word-container p {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+/* 刷新按钮样式 */
+.refresh-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #ff99e6;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.refresh-btn:hover {
+    background-color: #ff66cc;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.quiz-container {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffccf9 0%, #ff99e6 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.quiz-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff99e6;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quiz-btn:hover {
+    background-color: #ff66cc;
+}
+
+/* 进度条 */
+.progress-bar {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+#progressFill {
+    height: 20px;
+    border-radius: 5px;
+    background-color: green;
+}
+
+#quizStats {
+    margin-top: 20px;
+}
+
+/* 排行榜的样式 */
+.leaderboard-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.leaderboard-table th {
+    color: #ff66cc;
+    font-weight: bold;
+    padding: 15px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+}
+
+.leaderboard-table tr {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.leaderboard-table tr:hover {
+    transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.leaderboard-table td {
+    padding: 15px;
+    color: white;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.leaderboard-table td:first-child {
+    font-weight: bold;
+    color: #ff66cc;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.leaderboard-table td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/* 排行榜容器 */
+#leaderboard {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    margin-top: 20px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffccf9;
+    margin-bottom: 20px;
+}
+
+/* 搜索框样式 */
+.search-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search-container input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-container input:focus {
+    border-color: #ff66cc;
+}
+
+/* 单词列表样式 */
+.word-list {
+    max-height: 400px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.word-list-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.word-list-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.word-list-item span {
+    color: white;
+}
+
+.word-list-item button {
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.word-list-item button:hover {
+    background-color: #ff33aa;
+}
+
+/* 添加单词表单样式 */
+.add-word-form {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.add-word-form input {
+    width: 20%;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.add-word-form input:focus {
+    border-color: #ff66cc;
+}
+
+.add-word-form button {
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-word-form button:hover {
+    background-color: #ff33aa;
+}
+
+/* 留言输入框样式 */
+.message-input-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.message-input-container input {
+    width: 70%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.message-input-container input:focus {
+    border-color: #ff66cc;
+}
+
+.message-input-container button {
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+
+.message-input-container button:hover {
+    background-color: #ff33aa;
+}
+
+/* 留言列表样式 */
+.message-list {
+    max-height: 400px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.message-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.message-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.message-item span {
+    color: white;
+}
+
+.message-item button {
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.message-item button:hover {
+    background-color: #ff33aa;
+}
+
+/* 分页按钮样式 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+}
+
+.pagination button:hover {
+    background-color: #ff33aa;
+}
+
+.pagination span {
+    color: white;
+    font-size: 16px;
+}
+
+/* 回复相关样式 */
+.reply-container {
+    margin-left: 20px;
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+    padding-left: 10px;
+}
+
+.reply-item {
+    margin-top: 10px;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.reply-form {
+    margin-top: 10px;
+    display: flex;
+}
+
+.reply-form input {
+    flex-grow: 1;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.reply-form button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.show-replies-btn {
+    background: none;
+    border: none;
+    color: #ff66cc;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+/* 个人主页样式 */
+.profile-content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.profile-info {
+    width: 30%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-info button {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #ff66cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-info button:hover {
+    background-color: #ff33aa;
+}
+
+.user-messages {
+    width: 65%;
+}
+
+.user-messages .message-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.user-avatar {
+    width: 80px;  /* 从 100px 减小到 80px */
+    height: 80px; /* 从 100px 减小到 80px */
+    border-radius: 50%;
+    margin-bottom: 10px;
+    object-fit: cover; /* 确保图片填满圆形区域 */
+    
+}
+}

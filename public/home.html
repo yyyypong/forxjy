@@ -82,74 +82,136 @@
         <button id="refreshBtn" class="refresh-btn">刷新单词</button>
     </div>
 
-<!-- 单词抽查模块 -->
-<div id="quizSection" class="container">
-    <h2>单词抽查</h2>
+    <!-- 单词查模块 -->
+    <div id="quizSection" class="container" style="display: none;">
+        <h2>单词抽查</h2>
 
-    <!-- 单词显示区域 -->
-    <div id="quizWordDisplay" class="word-display">
-        <!-- 动态显示当前单词 -->
-    </div>
-
-    <!-- 选项区域 -->
-    <div id="quizOptions" class="options">
-        <!-- 动态生成选项 -->
-    </div>
-
-    <!-- 提交和下一题按钮 -->
-    <div class="button-group">
-        <!-- 提交按钮 -->
-        <button id="submitAnswerBtn" disabled>提交答案</button>
-        
-        <!-- 下一题按钮 -->
-        <button id="nextQuestionBtn" disabled>下一题</button>
-    </div>
-
-    <!-- 答案结果显示区 -->
-    <div id="quizResult"></div> <!-- 添加这个元素来显示答题结果 -->
-
-    <!-- 统计信息区 -->
-    <div id="quizStats" class="stats">
-        <p>答题总数: <span id="totalAttempts">0</span></p>
-        <p>正确率: <span id="accuracy">0%</span></p>
-
-        <div class="progress-bar">
-            <div id="progressFill"></div>
+        <!-- 单词显示区域 -->
+        <div id="quizWordDisplay" class="word-display">
+            <!-- 动态显示当前单词 -->
         </div>
 
-        <p>本周任务进度: <span id="weeklyProgress">0/20</span></p>
-        
-        <!-- 警告信息 -->
-        <p id="warningMessage" class="warningMessage">抓紧时间完成嗷，时间不多了！！！</p>
-    </div>
-</div>
+        <!-- 选项区域 -->
+        <div id="quizOptions" class="options">
+            <!-- 动态生成选项 -->
+        </div>
 
-<script src="js/script.js"></script>
-</body>
-</html>
+        <!-- 提交和下一题按钮 -->
+        <div class="button-group">
+            <!-- 提交按钮 -->
+            <button id="submitAnswerBtn" disabled>提交答案</button>
+            
+            <!-- 下一题按钮 -->
+            <button id="nextQuestionBtn" disabled>下一题</button>
+        </div>
+
+        <!-- 答案结果显示区 -->
+        <div id="quizResult"></div> <!-- 添加这个元素来显示答题结果 -->
+
+        <!-- 统计信息区 -->
+        <div id="quizStats" class="stats">
+            <p>答题总数: <span id="totalAttempts">0</span></p>
+            <p>正确率: <span id="accuracy">0%</span></p>
+
+            <div class="progress-bar">
+                <div id="progressFill"></div>
+            </div>
+
+            <p>本周任务进度: <span id="weeklyProgress">0/20</span></p>
+            
+            <!-- 警告信息 -->
+            <p id="warningMessage" class="warningMessage">抓紧时间完成嗷，时间不多了！！！</p>
+        </div>
+    </div>
 
     <!-- 排行榜模块 -->
     <div id="leaderboardSection" class="container" style="display: none;">
         <h2>排行榜</h2>
         <!-- 排行榜内容 -->
+            <div id="leaderboard">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>用户名</th>
+                            <th>积分</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardBody">
+                        <!-- 用户排行榜数据将通过JS动态填充 -->
+                    </tbody>
+                </table>
+            </div>
+        <section>
     </div>
 
     <!-- 单词库模块 -->
     <div id="wordbankSection" class="container" style="display: none;">
-        <h2>单词库</h2>
-        <!-- 单词库内容 -->
+        <h2 class="section-title">单词库</h2>
+        
+        <!-- 搜索框 -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="搜索单词...">
+        </div>
+        
+        <!-- 单词列表 -->
+        <div id="wordList" class="word-list">
+            <!-- 单词列表将通过JS动态填充 -->
+        </div>
+        
+        <!-- 添加单词表单 -->
+        <div class="add-word-form">
+            <input type="text" id="newWord" placeholder="单词">
+            <input type="text" id="newPos" placeholder="词性">
+            <input type="text" id="newExplanation" placeholder="解释">
+            <button id="addWordBtn">添加单词</button>
+        </div>
     </div>
 
     <!-- 留言板模块 -->
     <div id="messageboardSection" class="container" style="display: none;">
-        <h2>留言板</h2>
-        <!-- 留言板内容 -->
+        <h2 class="section-title">留言板</h2>
+        
+        <!-- 留言输入框 -->
+        <div class="message-input-container">
+            <input type="text" id="messageInput" placeholder="输入留言...">
+            <button id="submitMessageBtn">提交留言</button>
+        </div>
+        
+        <!-- 留言列表 -->
+        <div id="messageList" class="message-list">
+            <!-- 留言列表将通过JS动态填充 -->
+        </div>
+        
+        <!-- 分页按钮 -->
+        <div class="pagination">
+            <button id="prevPageBtn">上一页</button>
+            <span id="pageInfo"></span>
+            <button id="nextPageBtn">下一页</button>
+        </div>
     </div>
 
     <!-- 个人主页模块 -->
     <div id="profileSection" class="container" style="display: none;">
-        <h2>个人主页</h2>
-        <!-- 个人主页内容 -->
+        <h2 class="section-title">个人主页</h2>
+        <div class="profile-content">
+            <div class="profile-info">
+                <img id="userAvatar" src="default-avatar.png" alt="用户头像" class="user-avatar">
+                <h3 id="userName">用户名</h3>
+                <p id="userAccount">账号：</p>
+                <button id="changePasswordBtn">修改密码</button>
+                <button id="changeAvatarBtn">更换头像</button>
+                <button id="changeNameBtn">修改名称</button>
+                <button id="deleteAccountBtn">注销账户</button>
+                <button id="logoutBtn">退出登录</button>
+            </div>
+            <div class="user-messages">
+                <h3>我的留言</h3>
+                <div id="userMessageList" class="message-list">
+                    <!-- 用户留言将通过 JS 动态填充 -->
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="js/script.js"></script> <!-- 引入外部JS文件 -->

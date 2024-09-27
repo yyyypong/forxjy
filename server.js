@@ -10,17 +10,9 @@ const PORT = 3000;
 // 使用 Helmet 增强应用的安全性
 app.use(helmet());
 
-// 自定义 Content-Security-Policy
-app.use(helmet.contentSecurityPolicy({
-    directives: {
-        defaultSrc: ["'self'","http://127.0.0.1:5500"],
-        scriptSrc: ["'self'","http://127.0.0.1:5500"],
-    },
-}));
-
-// 配置 CORS，允许来自前端的请求（假设前端通过 Express 服务器提供）
+// CORS 配置
 app.use(cors({
-    origin: ['http://localhost:3000','http://localhost:5500', 'http://127.0.0.1:5500'], // 前端同一服务器，避免跨域问题
+    origin: ['http://localhost:3000', 'http://127.0.0.1:5501'], // 确保包含所有需要的源
     methods: ['GET', 'POST', 'DELETE'],
 }));
 
@@ -62,6 +54,7 @@ let messages = [];
  * 注册接口
  */
 app.post('/register', (req, res) => {
+    console.log(req.body); // 打印请求体
     const { account, password, activationCode } = req.body;
 
     if (!account || !password || !activationCode) {
@@ -87,6 +80,7 @@ app.post('/register', (req, res) => {
  * 登录接口
  */
 app.post('/login', (req, res) => {
+    console.log(req.body); // 打印请求体
     const { account, password } = req.body;
 
     if (!account || !password) {
@@ -99,7 +93,7 @@ app.post('/login', (req, res) => {
         return res.status(400).json({ message: '打错啦打错啦！！！！账号密码打错啦！！！！' });
     }
 
-    // 返回成功响应，确保返回 JSON 数据
+    // 返回成功响应，确返回 JSON 数据
     res.status(200).json({ message: '登录成功' });
 });
 
@@ -182,8 +176,8 @@ app.post('/api/submit-answer', (req, res) => {
 app.get('/api/leaderboard', (req, res) => {
     // 按积分排序
     const sortedUsers = users.sort((a, b) => b.points - a.points);
-    // 返回排序后的用户列表
-    const leaderboard = sortedUsers.map(user => ({
+    // 返回排序后的用户列表（只返回前10名）
+    const leaderboard = sortedUsers.slice(0, 10).map(user => ({
         account: user.account,
         points: user.points
     }));
@@ -239,49 +233,179 @@ app.delete('/api/words/:word', (req, res) => {
  * 获取所有留言
  */
 app.get('/api/messages', (req, res) => {
-    // 按时间排序，最新的在前
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
     const sortedMessages = messages.sort((a, b) => new Date(b.date) - new Date(a.date));
-    res.json(sortedMessages);
+    const paginatedMessages = sortedMessages.slice(startIndex, endIndex);
+
+    res.json({
+        messages: paginatedMessages,
+        totalPages: Math.ceil(messages.length / limit)
+    });
+});
+
+// 回复留言
+app.post('/api/messages/:id/reply', (req, res) => {
+    const { id } = req.params;
+    const { content, account } = req.body;
+    const message = messages.find(m => m.id === id);
+
+    if (!message) {
+        return res.status(404).json({ message: '留言未找到' });
+    }
+
+    if (!content) {
+        return res.status(400).json({ message: '回复内容不能为空' });
+    }
+
+    // 检查用户是否存在
+    const user = users.find(u => u.account === account);
+    if (!user) {
+        return res.status(401).json({ message: '用户未登录或不存在' });
+    }
+
+    const newReply = {
+        id: Date.now().toString(),
+        account: user.account,
+        content,
+        date: new Date()
+    };
+
+    if (!message.replies) {
+        message.replies = [];
+    }
+    message.replies.push(newReply);
+    res.status(200).json({ message: '回复成功', reply: newReply });
 });
 
 /**
  * 提交留言
  */
 app.post('/api/messages', (req, res) => {
-    const { account, content } = req.body;
+    const { content, account } = req.body;
 
     if (!content) {
         return res.status(400).json({ message: '留言内容不能为空' });
     }
 
     const newMessage = {
-        account: account || '匿名用户',
+        id: Date.now().toString(),
+        account: account || '匿名用户',  // 使用提供的账号，如果没有则使用匿名用户
         content,
-        date: new Date()
+        date: new Date(),
+        likes: 0
     };
 
     messages.push(newMessage);
     res.status(200).json({ message: '留言成功' });
 });
 
-/* 6. 个人主页 API */
-
 /**
- * 获取单个用户信息
+ * 点赞留言
  */
-app.get('/api/users/:account', (req, res) => {
-    const { account } = req.params;
-    const user = users.find(u => u.account.toLowerCase() === account.toLowerCase());
+app.post('/api/messages/:id/like', (req, res) => {
+    const { id } = req.params;
+    const message = messages.find(m => m.id === id);
 
-    if (!user) {
-        return res.status(404).json({ message: '用户未找到' });
+    if (!message) {
+        return res.status(404).json({ message: '留言未找到' });
     }
 
+    message.likes += 1;
+    res.status(200).json({ message: '点赞成功' });
+});
+
+// 获取用户信息
+app.get('/api/users/:account', (req, res) => {
+    const { account } = req.params;
+    const user = users.find(u => u.account === account);
+    if (!user) {
+        return res.status(404).json({ message: '用户不存在' });
+    }
     res.json({
         account: user.account,
-        points: user.points,
-        quizRecords: user.quizRecords
+        name: user.name,
+        avatar: user.avatar,
+        points: user.points
     });
+});
+
+// 修改密码
+app.put('/api/users/:account/password', (req, res) => {
+    const { account } = req.params;
+    const { newPassword } = req.body;
+    const user = users.find(u => u.account === account);
+    if (!user) {
+        return res.status(404).json({ message: '用户不存在' });
+    }
+    user.password = newPassword;
+    res.json({ message: '密码修改成功' });
+});
+
+// 更换头像
+app.put('/api/users/:account/avatar', (req, res) => {
+    const { account } = req.params;
+    const { avatarUrl } = req.body;
+    const user = users.find(u => u.account === account);
+    if (!user) {
+        return res.status(404).json({ message: '用户不存在' });
+    }
+    user.avatar = avatarUrl;
+    res.json({ message: '头像更新成功' });
+});
+
+// 处理根路径的请求
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// 修改名称
+app.put('/api/users/:account/name', (req, res) => {
+    const { account } = req.params;
+    const { newName } = req.body;
+    const user = users.find(u => u.account === account);
+    if (!user) {
+        return res.status(404).json({ message: '用户不存在' });
+    }
+    user.name = newName;
+    res.json({ message: '名称修改成功' });
+});
+
+// 删除账户
+app.delete('/api/users/:account', (req, res) => {
+    const { account } = req.params;
+    const index = users.findIndex(u => u.account === account);
+    if (index === -1) {
+        return res.status(404).json({ message: '用户不存在' });
+    }
+    users.splice(index, 1);
+    // 这里还应该删除用户的留言等相关数据
+    res.json({ message: '账户已注销' });
+});
+
+// 获取用户留言
+app.get('/api/messages', (req, res) => {
+    const { account } = req.query;
+    if (account) {
+        const userMessages = messages.filter(m => m.account === account);
+        res.json({ messages: userMessages });
+    } else {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 5;
+        const startIndex = (page - 1) * limit;
+        const endIndex = page * limit;
+
+        const sortedMessages = messages.sort((a, b) => new Date(b.date) - new Date(a.date));
+        const paginatedMessages = sortedMessages.slice(startIndex, endIndex);
+
+        res.json({
+            messages: paginatedMessages,
+            totalPages: Math.ceil(messages.length / limit)
+        });
+    }
 });
 
 // 启动服务器
